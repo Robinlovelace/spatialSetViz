@@ -25,11 +25,20 @@ qtm(p_sp, symbols.size = 3) +
 
 # convert to graph
 library(igraph)
-library(tidygraph)
 g = graph(n = nrow(p), edges = c(1, 2, 1, 3))
-
+e = NULL
+for(i in 1:nrow(p)) {
+  for(j in 1:nrow(p)) {
+    if(i < j) {
+      e = c(e, i, j)
+    }
+  }
+}
+g = graph(n = nrow(p), edges = e)
+plot(g)
 dists = spDists(p_sp)
-mst = mst(graph = g, weights = unlist(dists))
+
+# fails
+mst = mst(graph = g, weights = unlist(dists)[1:length(e)])
 
 
-tidygraph::

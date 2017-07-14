@@ -26,9 +26,10 @@ qtm(p_sp, symbols.size = 3) +
 # convert to graph
 library(igraph)
 library(tidygraph)
+g = graph(n = nrow(p), edges = c(1, 2, 1, 3))
 
 dists = spDists(p_sp)
-mst(graph = )
+mst = mst(graph = g, weights = unlist(dists))
 
 
 tidygraph::
